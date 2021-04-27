@@ -9,11 +9,17 @@ import {
     Td,
     
   } from '@chakra-ui/react';
+import {useHistory} from 'react-router-dom';
   
 
 function Grid({data}) {
   const{id, types, name} = data
-  
+  const history = useHistory()
+
+  const handleRowClick = () => {
+    history.push(`/detail/${id}/${name}`)
+  }
+
     return (
         <Center>
           <Table variant="simple" size="lg" width="80%">
@@ -22,15 +28,14 @@ function Grid({data}) {
                 <Th>Number</Th>
                 <Th>Name</Th>
                 <Th>Type</Th>
-                <Th>Type 2</Th>
+                {types && types.length > 1 && <Th>Type 2</Th>}
               </Tr>
             </Thead>
             <Tbody>
-              <Tr>
+              <Tr style={{cursor:'pointer'}} onClick={handleRowClick}>
                 <Td>{id}</Td>
                 <Td>{name}</Td>
                 {types && types.map((row) => <Td>{row.type.name}</Td>)}
-                
               </Tr>
             </Tbody>
           </Table>

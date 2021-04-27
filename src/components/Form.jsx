@@ -22,6 +22,7 @@ function Form() {
     const[data, setData] = useState({})
     const[error, setError] = useState()
 
+
     /**
     * Bij het gebruik van swr
     */
@@ -36,7 +37,7 @@ function Form() {
         setData({})
         setError()
 
-        axios.get(`https://pokeapi.co/api/v2/pokemon/${search}`)
+        axios.get(`https://pokeapi.co/api/v2/pokemon/${search.toLowerCase()}`)
         .then(resp => {
             setData(resp.data)
         })
@@ -51,22 +52,30 @@ function Form() {
     return (
         <>
         <Center>
-          <FormControl border="1px" width="80%" >
+          
+          <FormControl border="1px" width="80%">
+          <form onSubmit={handleFormSubmit}>
             <Flex height={20} align="center">
               <Input placeholder="Search for Pokémon" ml="5" onChange={e => setSearch(e.target.value)}/>
+              <Input display="none" type="submit" />
               <IconButton
                 aria-label="icon"
                 icon={<SearchIcon />}
                 size="md"
                 mx="5"
                 onClick={handleFormSubmit}
+                
               />
             </Flex>
+          </form>
           </FormControl>
           
           
+          
         </Center>
-        {error && <h1>De pokemon bestaat niet</h1>}
+        <Center my="5">
+        {error && <h1>De pokemon bestaat niet / De naam is fout geschreven</h1>}
+        </Center>
         {data && <Grid data={data}/>}
         
         </>
