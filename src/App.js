@@ -19,7 +19,7 @@ function App() {
 
             <Form />
           </Route>
-          <Route path="/detail/:id/:name">
+          <Route path="/detail/:name">
             <Detail />
           </Route>
         </ChakraProvider>

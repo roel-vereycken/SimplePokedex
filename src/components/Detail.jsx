@@ -17,7 +17,7 @@ function Detail() {
     const {id, name} = params
 
     const { data, error } = useSWR(
-            `https://pokeapi.co/api/v2/pokemon/${id}`,
+            `https://pokeapi.co/api/v2/pokemon/${name}`,
             fetcher
           );
 

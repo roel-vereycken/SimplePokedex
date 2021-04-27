@@ -17,7 +17,7 @@ function Grid({data}) {
   const history = useHistory()
 
   const handleRowClick = () => {
-    history.push(`/detail/${id}/${name}`)
+    history.push(`/detail/${name}`)
   }
 
     return (
