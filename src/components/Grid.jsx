@@ -10,6 +10,7 @@ import {
     
   } from '@chakra-ui/react';
 import {useHistory} from 'react-router-dom';
+import slugify from "slugify"
   
 
 function Grid({data}) {
@@ -17,7 +18,10 @@ function Grid({data}) {
   const history = useHistory()
 
   const handleRowClick = () => {
-    history.push(`/detail/${name}`)
+    history.push(`/detail/${slugify(name, {
+      lower: true,
+      strict: true
+    })}`)
   }
 
     return (

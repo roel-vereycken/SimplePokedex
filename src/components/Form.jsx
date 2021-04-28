@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { SearchIcon, ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
 import { Link } from 'react-router-dom';
+import slugify from 'slugify'
 
 import Grid from './Grid';
 
@@ -82,7 +83,7 @@ function Form() {
           <FormControl border="1px" width="80%">
           <form onSubmit={handleFormSubmit}>
             <Flex height={20} align="center">
-              <Input value={search} placeholder="Search for Pokémon" ml="5" onChange={e => setSearch(e.target.value)}/>
+              <Input value={search} placeholder="Search for Pokémon by name or id" ml="5" onChange={e => setSearch(e.target.value)}/>
               <Input display="none" type="submit" />
               <IconButton
                 aria-label="icon"
@@ -93,7 +94,7 @@ function Form() {
               />
               <Button mr="5"
                       onClick={() => setAllPokemon(`https://pokeapi.co/api/v2/pokemon`)}>
-                Get All Pokemon
+                Get All
               </Button>
             </Flex>
           </form>
@@ -109,7 +110,10 @@ function Form() {
         <Center flexDirection="column">
         {data.count && (
           <>
-          {data.results.map((pokemon) => <Link to={`/detail/${pokemon.name}`}><p>{pokemon.name}</p></Link>)}
+          {data.results.map((pokemon) => <Link to={`/detail/${slugify(pokemon.name, {
+            lower: true,
+            strict: true
+          })}`}><p>{pokemon.name}</p></Link>)}
           <Flex>
             {data.previous && 
             <IconButton 
