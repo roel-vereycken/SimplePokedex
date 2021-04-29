@@ -37,7 +37,7 @@ function Detail() {
                     </Box>
                     <Box>
                         <ul>
-                            <li>ID: {id}</li>
+                            <li>ID: {data.id}</li>
                             <li>NAME: {name}</li>
                             <li>WEIGHT: {data.weight}lbs</li>
                         </ul>
